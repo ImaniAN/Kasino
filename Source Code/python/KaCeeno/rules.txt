@@ -1,0 +1,28 @@
+Each player plays a single card from hand during his or her turn. With that card, the player may pick up cards from the table or
+decide to just end turn there. The value of the cards picked must be exactly the value of the played card, eg. if the player plays
+the nine of clubs, he must pick cards from the table so that the value of the picked cards are 9 (like a 6 and a 3). A player may
+take cards from the table as many as the combinations add up to the card played from hand (eg. when you play a 9 you can pick a 6 and 3
+AND a 9). There are a few special cards that's value change whether they are in the player's hand or on the table:
+An ace is 14 in hand, 1 on table 2 of spades is 15 in hand, 2 on table 10 of diamonds is 16 in hand, 10 on table
+All the rest of the cards are as they are.
+
+The cards picked go to the players own stack until the end of the round when the points are counted. The points are as follows:
+1 point for each ace in your collected stack
+1 point for the 2 of spades
+2 points for the 10 of diamonds
+1 point for each time you emptied the table (ie. took all the cards from the table)
+1 point for the player who collected most cards
+2 points for the player who collected the most spades.
+
+The game is played until 16 points and the points are counted after each round. A round ends when no player has any cards in their hand
+and after each turn the player draws one card so that they have 4 cards in hand all the time. If more than one player has over 16 points
+after a round, the winner is the player with most points.
+
+About the console:
+On the sidepanel are all the buttons for the player. With the "End turn" button you may end your turn AFTER you have played a card from
+your hand, which is displayed on the right. "Play card" button plays the selected card from your hand as long as you haven't taken any
+cards from the table. After taking cards, the selected card is locked. With the "Take cards" button, the player may take cards from the table
+as long as the value matches the played card. The table is in the middle and selecting cards from either the table or the hand works just by
+simply clicking the card. A card from the hand is always selected after you initially select one, since a turn always includes one played card.
+On the bottom there is a text area, where basic information of the game is displayed (eg. who's turn it is and what they have done during their
+turn).
