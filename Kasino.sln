@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source Code", "Source Code", "{68B1F2B1-8653-4092-BB51-19A4F9833036}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "casino", "Source Code\C#\casino.csproj", "{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9FE196C0-9FC8-4E7E-8895-9A5DB70F8243} = {68B1F2B1-8653-4092-BB51-19A4F9833036}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11CB11F6-4D8C-427A-B926-D67AFED3920C}
+	EndGlobalSection
+EndGlobal
