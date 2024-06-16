@@ -1,32 +1,44 @@
-﻿using Kasino.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Kasino.Controllers
 {
-  public class PlayerController : Controller
+  [Route("api/[controller]")]
+  [ApiController]
+  public class PlayerController : ControllerBase
   {
-    private readonly ILogger<PlayerController> _logger;
+    private readonly IPlayerService _playerService;
 
-    public PlayerController(ILogger<PlayerController> logger)
+    public PlayerController(IPlayerService playerService)
     {
-      _logger = logger;
+      _playerService = playerService;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
     {
-      return View();
+      return Ok(await _playerService.GetAllPlayersAsync());
     }
 
-    public IActionResult Privacy()
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Player>> GetPlayer(string id)
     {
-      return View();
+      var player = await _playerService.GetPlayerByIdAsync(id);
+
+      if (player == null)
+      {
+        return NotFound();
+      }
+
+      return Ok(player);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpPost]
+    public async Task<ActionResult<Player>> CreatePlayer(Player player)
     {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+      await _playerService.CreatePlayerAsync(player);
+      return CreatedAtAction(nameof(GetPlayer), new { id = player.Id }, player);
     }
+
+    // Additional actions (e.g., Update, Delete) can be added here
   }
 }

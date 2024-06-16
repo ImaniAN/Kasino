@@ -1,32 +1,44 @@
-﻿using Kasino.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Kasino.Controllers
 {
-  public class GameController : Controller
+  [Route("api/[controller]")]
+  [ApiController]
+  public class GameController : ControllerBase
   {
-    private readonly ILogger<GameController> _logger;
+    private readonly IGameService _gameService;
 
-    public GameController(ILogger<GameController> logger)
+    public GameController(IGameService gameService)
     {
-      _logger = logger;
+      _gameService = gameService;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Game>>> GetGames()
     {
-      return View();
+      return Ok(await _gameService.GetAllGamesAsync());
     }
 
-    public IActionResult Privacy()
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Game>> GetGame(string id)
     {
-      return View();
+      var game = await _gameService.GetGameByIdAsync(id);
+
+      if (game == null)
+      {
+        return NotFound();
+      }
+
+      return Ok(game);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpPost]
+    public async Task<ActionResult<Game>> CreateGame(Game game)
     {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+      await _gameService.CreateGameAsync(game);
+      return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
     }
+
+    // Additional actions (e.g., Update, Delete) can be added here
   }
 }
