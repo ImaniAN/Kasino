@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace Kasino.Controllers
 {
-  public class HomeController : Controller
+  public class GameController : Controller
   {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<GameController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public GameController(ILogger<GameController> logger)
     {
       _logger = logger;
     }
