@@ -11,6 +11,18 @@ namespace Kasino.Models
     public Deck Deck { get; set; } = new Deck();
     public int CurrentRound { get; set; }
 
+    public List<Build> Builds { get; set; } = new List<Build>();
+
+    // Method to add a Build object to the game state
+    public void AddBuildToGameState(Build build)
+    {
+      // Add the build to the Builds collection
+      Builds.Add(build);
+
+      // Additional logic to handle the build in the game state
+      // For example, you might need to notify players, update the game board, etc.
+    }
+
     // Method to check if a card is special based on more complex criteria
     public static bool IsCardSpecial(Card card)
     {
@@ -94,7 +106,6 @@ namespace Kasino.Models
       // Check if there are combinations on the floor that sum up to the target value
       foreach (var floorCard in FloorCards)
       {
-        // This is a simplified check; in a real game, you'd need to check all combinations
         if (playedCard.Value + floorCard.Value == targetValue)
         {
           potentialBuildCards.Add(floorCard);
@@ -104,14 +115,9 @@ namespace Kasino.Models
       // If a valid build is possible
       if (potentialBuildCards.Any())
       {
-        // Create a new Build object (assuming you have such a class to represent builds)
-        // This object would include the cards in the build and the player who created it
-        // Create a new Build object with the 'owner' parameter provided
+        // Correctly instantiate a Build object with the player and the combined cards
         Build newBuild = new Build(player, new List<Card> { playedCard }.Concat(potentialBuildCards).ToList());
-        {
-          Owner = player,
-          Cards = new List<Card> { playedCard }.Concat(potentialBuildCards).ToList()
-        };
+
 
         // Remove the played card from the player's hand
         player.Hand.Remove(playedCard);
@@ -122,17 +128,16 @@ namespace Kasino.Models
           FloorCards.Remove(card);
         }
 
-        // Add the new build to the floor
-        // Assuming FloorCards can also hold Build objects; you might need a separate collection for builds
-        FloorCards.Add(newBuild);
+        // Example solution for handling builds:
+        // Assuming there's a method to add builds to the game state
+        AddBuildToGameState(newBuild);
 
-        // Note: This example assumes a lot about the data structures you're using.
-        // You'll need to adjust it to fit your actual class designs.
+        // Note: You'll need to implement the AddBuildToGameState method or similar
+        // to properly handle the new+-Build object according to your game's rules.
       }
       else
       {
         // Handle the case where a build is not possible
-        // For example, you might throw an exception or simply return
         throw new InvalidOperationException("Build is not possible with the provided card and target value.");
       }
     }
@@ -153,31 +158,35 @@ namespace Kasino.Models
       // Additional logic for special Lahlaring rules or effects might go here
     }
 
-
     public void CalculateScores()
     {
       foreach (var player in Players)
       {
         int score = 0;
+        List<Card> capturedCards = player.CapturedCards;
 
         // Basic scoring: 1 point per captured card
-        score += player.CapturedCards.Count;
+        score += capturedCards.Count;
 
-        // Example of additional scoring rules
-        // Award extra points for specific cards or combinations
-        // This is highly dependent on your game's rules
-        var specialCards = player.CapturedCards.Where(card => IsCardSpecial(card));
-        score += specialCards.Count() * 2; // Example: Special cards are worth double points
+        // Additional scoring based on specific rules
+        int totalCards = capturedCards.Count;
+        int spadesCount = capturedCards.Count(card => card.Suit == Suits.S);
+        int diamondsCount = capturedCards.Count(card => card.Value == 10 && card.Suit == Suits.D);
+        int spadesTwoCount = capturedCards.Count(card => card.Value == 2 && card.Suit == Suits.S);
+        int acesCount = capturedCards.Count(card => card.Value == 1);
+
+        score += totalCards / 20; // 1 point for every 20 cards
+        score += totalCards > 20 ? 2 : 0; // 2 points for more than 20 cards
+        score += spadesCount > 5 ? 1 : 0; // 1 point for more than 5 Spades
+        score += diamondsCount == 1 ? 2 : 0; // 2 points for capturing Ten of Diamonds
+        score += spadesTwoCount == 1 ? 1 : 0; // 1 point for capturing Two of Spades
+        score += acesCount; // 1 point for each Ace captured
 
         // Update the player's score
-        player.Score += score; // Assuming Player has a Score property
-
-        // Additional scoring logic here
-        // For example, bonus points for capturing the most cards, specific combinations, etc.
+        player.Score += score;
       }
 
-      // After calculating scores, you might want to determine the round or game winner
-      // and perform any necessary game state updates
+      // Additional scoring logic and determining the round or game winner can be added here
     }
 
   }

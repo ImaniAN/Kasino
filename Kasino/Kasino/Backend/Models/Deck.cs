@@ -28,7 +28,7 @@ namespace Kasino.Models
       }
     }
 
-    public Card? DealCard()
+    public Card? DishCard()
     {
       // Ensure Cards is not null and has elements before proceeding
       if (Cards == null || Cards.Count == 0)
