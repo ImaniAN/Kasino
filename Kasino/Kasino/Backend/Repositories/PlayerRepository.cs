@@ -32,6 +32,16 @@ namespace Kasino.Repositories
       await _context.SaveChangesAsync();
     }
 
+    public Task UpdatePlayerAsync(Player player)
+    {
+      throw new NotImplementedException();
+    }
+
+    public Task DeletePlayerAsync(Player player)
+    {
+      throw new NotImplementedException();
+    }
+
     // Additional methods for update, delete
   }
 }
