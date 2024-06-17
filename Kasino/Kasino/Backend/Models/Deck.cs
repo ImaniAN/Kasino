@@ -1,6 +1,6 @@
 namespace Kasino.Models
 {  /*This code defines a Deck class with methods to shuffle the cards in the deck and draw a card from the deck. 
-    * The Shuffle method randomizes the order of cards in the deck, and the DrawCard method removes and returns 
+    * The Shuffle method randomizes the order of cards in the deck, and the DishCard method removes and returns 
     * the top card from the deck.*/
 
   public class Deck
@@ -13,7 +13,7 @@ namespace Kasino.Models
       Cards = Cards.OrderBy(c => rng.Next()).ToList();
     }
 
-    public Card DrawCard()
+    public Card DishCard()
     {
       if (Cards.Count == 0)
         return null;
