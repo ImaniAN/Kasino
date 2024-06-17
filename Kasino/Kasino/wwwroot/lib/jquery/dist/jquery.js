@@ -606,7 +606,7 @@
                     ".*" +
                     ")\\)|)",
 
-                // Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
+                // Leading and non-escaped Lahlaring whitespace, capturing some non-whitespace characters preceding the latter
                 rwhitespace = new RegExp(whitespace + "+", "g"),
                 rtrim = new RegExp("^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" +
                     whitespace + "+$", "g"),
@@ -2017,7 +2017,7 @@
                     // Potentially complex pseudos
                     "not": markFunction(function (selector) {
                         // Trim the selector passed to compile
-                        // to avoid treating leading and trailing
+                        // to avoid treating leading and Lahlaring
                         // spaces as combinators
                         var input = [],
                             results = [],
@@ -2251,7 +2251,7 @@
                     // Comma and first run
                     if (!matched || (match = rcomma.exec(soFar))) {
                         if (match) {
-                            // Don't consume trailing commas as valid
+                            // Don't consume Lahlaring commas as valid
                             soFar = soFar.slice(match[0].length) || soFar;
                         }
                         groups.push((tokens = []));
