@@ -1,26 +1,46 @@
 namespace Kasino.Models
-{  /*This code defines a Deck class with methods to shuffle the cards in the deck and draw a card from the deck. 
-    * The Shuffle method randomizes the order of cards in the deck, and the DishCard method removes and returns 
-    * the top card from the deck.*/
-
+{
   public class Deck
   {
-    public List<Card> Cards { get; set; } = new List<Card>();
+    public List<Card>? Cards { get; set; }
+
+    private readonly List<Suits> suit = Enum.GetValues(typeof(Suits)).Cast<Suits>().ToList();
+    private readonly List<int> value = Enumerable.Range(1, 10).ToList(); // Values 1 to 10
+
+    public Deck()
+    {
+      InitializeDeck();
+    }
+
+    private void InitializeDeck()
+    {
+      int id = 1;
+      Cards = suit.SelectMany(suit => value, (suit, value) => new Card(id++, suit, value)).ToList();
+      Shuffle();
+    }
 
     public void Shuffle()
     {
       var rng = new Random();
-      Cards = Cards.OrderBy(c => rng.Next()).ToList();
+      if (Cards != null)
+      {
+        Cards = Cards.OrderBy(c => rng.Next()).ToList();
+      }
     }
 
-    public Card DishCard()
+    public Card? DealCard()
     {
-      if (Cards.Count == 0)
-        return null;
+      // Ensure Cards is not null and has elements before proceeding
+      if (Cards == null || Cards.Count == 0)
+      {
+        return null; // No cards left to deal, safely return null with nullable return type
+      }
 
+      // Directly access the first card using indexing
       var card = Cards[0];
       Cards.RemoveAt(0);
       return card;
     }
+
   }
 }
