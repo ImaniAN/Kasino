@@ -13,5 +13,18 @@ namespace Kasino.Data
     public DbSet<Player> Players { get; set; }
     public DbSet<Move> Moves { get; set; }
 
+    internal void SaveChanges()
+    {
+      throw new NotImplementedException();
+    }
+
+    internal async Task SaveChangesAsync()
+    {
+      throw new NotImplementedException();
+    }
+  }
+
+  public class DbContextOptions<T>
+  {
   }
 }
