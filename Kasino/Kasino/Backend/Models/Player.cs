@@ -11,9 +11,16 @@ namespace Kasino.Models
     public List<Card> CapturedCards { get; set; } = new List<Card>();
     public int Score { get; set; }
 
+    // Constructor that accepts a name parameter
     public Player(string name)
     {
       Name = name;
+    }
+
+    // Optionally, you can have another constructor that accepts both name and score
+    public Player(string name, int score) : this(name)
+    {
+      Score = score;
     }
   }
 }
