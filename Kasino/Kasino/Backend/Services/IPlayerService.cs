@@ -9,5 +9,7 @@ namespace Kasino.Services
     Task<Player> GetPlayerByIdAsync(string id);
     Task<bool> UpdatePlayerScoreAsync(string id, int newScore);
     Task<bool> DeletePlayerAsync(string id);
+    // Adds a new player asynchronously and returns the created player object or its identifier
+    Task<Player> CreatePlayerAsync(Player player);
   }
 }
