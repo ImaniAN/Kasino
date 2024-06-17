@@ -1,7 +1,12 @@
+using Kasino.Data;
 using Kasino.Models;
 
 namespace Kasino.Repositories
-{
+{  /*This code snippet defines a GameRepository class that implements the IGameRepository interface. 
+    * It contains methods for asynchronously retrieving all games, getting a game by its ID, and creating a new game. 
+    * It also mentions the possibility of additional methods for updating and deleting games. 
+    * The repository interacts with a GameDbContext to perform these operations.*/
+
   public class GameRepository : IGameRepository
   {
     private readonly GameDbContext _context;

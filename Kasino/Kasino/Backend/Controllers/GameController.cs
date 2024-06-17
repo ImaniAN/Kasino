@@ -1,7 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Kasino.Backend.Services;
+using Kasino.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kasino.Controllers
-{
+{  /*This code defines a GameController class that handles HTTP requests related to games. 
+    * It uses attributes like [Route("api/[controller]")] and [ApiController] for routing and identifying it as a controller. 
+    * The class has methods for getting all games, getting a game by ID, and creating a new game. 
+    * It interacts with a service through dependency injection (IGameService) to perform these operations asynchronously.
+
+*/
+
   [Route("api/[controller]")]
   [ApiController]
   public class GameController : ControllerBase
@@ -13,32 +21,41 @@ namespace Kasino.Controllers
       _gameService = gameService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Game>>> GetGames()
+    [HttpGet(Name = "GetAllGames")]
+    public async Task<ActionResult<IEnumerable<Game>>> GetGamesAsync()
     {
       return Ok(await _gameService.GetAllGamesAsync());
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Game>> GetGame(string id)
+    [HttpGet("{id}", Name = "GetGameById")]
+    public async Task<ActionResult<Game>> GetGameAsync(string id)
     {
       var game = await _gameService.GetGameByIdAsync(id);
-
       if (game == null)
       {
-        return NotFound();
+        return NotFoundResponse(id);
+      }
+      else
+      {
+        return Ok(game);
+      }
+    }
+
+    [HttpPost(Name = "CreateGame")]
+    public async Task<ActionResult<Game>> CreateGameAsync(Game game)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
       }
 
-      return Ok(game);
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<Game>> CreateGame(Game game)
-    {
       await _gameService.CreateGameAsync(game);
-      return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
+      return CreatedAtAction(nameof(GetGameAsync), new { id = game.Id }, game);
     }
 
-    // Additional actions (e.g., Update, Delete) can be added here
+    private ActionResult NotFoundResponse(string id)
+    {
+      return NotFound($"Game with ID {id} not found.");
+    }
   }
 }

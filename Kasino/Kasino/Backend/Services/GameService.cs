@@ -1,8 +1,13 @@
+using Kasino.Backend.Services;
 using Kasino.Models;
 using Kasino.Repositories;
 
 namespace Kasino.Services
 {
+  /*This code defines a GameService class that implements IGameService. 
+   * It interacts with a data repository (IGameRepository) to perform operations like getting all games, 
+   * getting a game by ID, and creating a new game asynchronously.*/
+
   public class GameService : IGameService
   {
     private readonly IGameRepository _gameRepository;

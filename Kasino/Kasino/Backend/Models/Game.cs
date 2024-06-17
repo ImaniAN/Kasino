@@ -1,5 +1,8 @@
 namespace Kasino.Models
 {
+  /*This code defines a Game class that represents a card game. It has properties for 
+   * Id, Players, TableCards, Deck, and CurrentRound. 
+   * It also includes methods for dealing cards, capturing cards, building, trailing, and calculating scores in the game.*/
   public class Game
   {
     public string Id { get; set; }
