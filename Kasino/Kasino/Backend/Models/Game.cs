@@ -1,3 +1,5 @@
+using Kasino.Backend.Models;
+
 namespace Kasino.Models
 {
   /*This code defines a Game class that represents a card game. It has properties for 
@@ -5,7 +7,7 @@ namespace Kasino.Models
    * It also includes methods for dealing cards, capturing cards, building, Lahlaring, and calculating scores in the game.*/
   public class Game
   {
-    public string Id { get; set; }
+    public string? Id { get; set; }
     public List<Player> Players { get; set; } = new List<Player>();
     public List<Card> FloorCards { get; set; } = new List<Card>();
     public Deck Deck { get; set; } = new Deck();
@@ -33,17 +35,14 @@ namespace Kasino.Models
     public void DealCards()
     {
       int cardsPerPlayer;
-      int initialFloorCards;
 
       switch (Players.Count)
       {
         case 2 or 4:
           cardsPerPlayer = 10;
-          initialFloorCards = 0;
           break;
         case 3:
           cardsPerPlayer = 13; // 13 cards per player
-          initialFloorCards = 1; // 1 initial table card for 3 players
           break;
         default:
           throw new InvalidOperationException("Unsupported number of players");
@@ -54,14 +53,12 @@ namespace Kasino.Models
       {
         for (int i = 0; i < cardsPerPlayer; i++)
         {
-          player.Hand.Add(Deck.DishCard());
+          var card = Deck.DishCard();
+          if (card != null)
+          {
+            player.Hand.Add(card);
+          }
         }
-      }
-
-      // Place initial table cards
-      for (int i = 0; i < initialFloorCards; i++)
-      {
-        FloorCards.Add(Deck.DishCard());
       }
     }
 
