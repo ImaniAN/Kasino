@@ -1,47 +1,63 @@
 using Kasino.Data;
 using Kasino.Models;
+using System.Data.Entity;
 
 namespace Kasino.Repositories
 {
+  // PlayerRepository handles database operations for Player entities
   public class PlayerRepository : IPlayerRepository
-  {  /*This code defines a PlayerRepository class that implements the IPlayerRepository interface. 
-      * It interacts with a GameDbContext to perform asynchronous operations for 
-      * getting all players, fetching a player by ID, and creating a new player. 
-      * Additional methods for updating and deleting players can be added.*/
-
+  {
     private readonly GameDbContext _context;
 
+    // Constructor for PlayerRepository
     public PlayerRepository(GameDbContext context)
     {
       _context = context;
     }
 
+    // Get all players asynchronously
     public async Task<IEnumerable<Player>> GetAllPlayersAsync()
     {
       return await _context.Players.ToListAsync();
     }
 
+    // Get a player by id asynchronously
     public async Task<Player> GetPlayerByIdAsync(string id)
     {
       return await _context.Players.FindAsync(id);
     }
 
-    public async Task CreatePlayerAsync(Player player)
+    // Add a player asynchronously
+    public async Task AddPlayerAsync(Player player)
     {
       _context.Players.Add(player);
       await _context.SaveChangesAsync();
     }
 
-    public Task UpdatePlayerAsync(Player player)
+    // Create a player asynchronously, similar to AddPlayerAsync
+    public async Task<Player> CreatePlayerAsync(Player player)
     {
-      throw new NotImplementedException();
+      _context.Players.Add(player);
+      await _context.SaveChangesAsync();
+      return player;
     }
 
-    public Task DeletePlayerAsync(Player player)
+    // Update a player asynchronously
+    public async Task UpdatePlayerAsync(Player player)
     {
-      throw new NotImplementedException();
+      _context.Entry(player).State = EntityState.Modified;
+      await _context.SaveChangesAsync();
     }
 
-    // Additional methods for update, delete
+    // Delete a player asynchronously
+    public async Task DeletePlayerAsync(Player player)
+    {
+      if (_context.Entry(player).State == EntityState.Detached)
+      {
+        _context.Players.Attach(player);
+      }
+      _context.Players.Remove(player);
+      await _context.SaveChangesAsync();
+    }
   }
 }

@@ -3,32 +3,47 @@ using Kasino.Repositories;
 
 namespace Kasino.Services
 {
+  /// <summary>
+  /// Service for managing player data
+  /// </summary>
   public class PlayerService : IPlayerService
-  {/*This code defines a PlayerService class that implements the IPlayerService interface. 
-    * It interacts with a IPlayerRepository to perform operations like 
-    * getting all players, 
-    * fetching a player by ID,
-    * updating a player's score, 
-    * deleting a player, 
-    * and creating a new player with asynchronous methods.*/
+  {
     private readonly IPlayerRepository _playerRepository;
 
+    /// <summary>
+    /// Constructor for PlayerService
+    /// </summary>
+    /// <param name="playerRepository">Player repository dependency</param>
     public PlayerService(IPlayerRepository playerRepository)
     {
       _playerRepository = playerRepository;
     }
 
+    /// <summary>
+    /// Get all players asynchronously
+    /// </summary>
+    /// <returns>The list of all players</returns>
     public async Task<IEnumerable<Player>> GetAllPlayersAsync()
     {
       return await _playerRepository.GetAllPlayersAsync();
     }
 
+    /// <summary>
+    /// Get a player by ID asynchronously
+    /// </summary>
+    /// <param name="id">Player ID</param>
+    /// <returns>The player with the specified ID</returns>
     public async Task<Player> GetPlayerByIdAsync(string id)
     {
       return await _playerRepository.GetPlayerByIdAsync(id);
     }
 
-    // New method to update a player's score
+    /// <summary>
+    /// Update a player's score asynchronously
+    /// </summary>
+    /// <param name="id">Player ID</param>
+    /// <param name="newScore">New score to set</param>
+    /// <returns>True if the update was successful, false otherwise</returns>
     public async Task<bool> UpdatePlayerScoreAsync(string id, int newScore)
     {
       var player = await _playerRepository.GetPlayerByIdAsync(id);
@@ -42,7 +57,11 @@ namespace Kasino.Services
       return true;
     }
 
-    // New method to delete a player
+    /// <summary>
+    /// Delete a player by ID asynchronously
+    /// </summary>
+    /// <param name="id">Player ID</param>
+    /// <returns>True if the deletion was successful, false otherwise</returns>
     public async Task<bool> DeletePlayerAsync(string id)
     {
       var player = await _playerRepository.GetPlayerByIdAsync(id);
@@ -55,9 +74,15 @@ namespace Kasino.Services
       return true;
     }
 
-    public Task CreatePlayerAsync(Player player)
+    /// <summary>
+    /// Create a new player asynchronously
+    /// </summary>
+    /// <param name="player">Player object to create</param>
+    /// <returns>The created player</returns>
+    public async Task<Player> CreatePlayerAsync(Player player)
     {
-      throw new NotImplementedException();
+      await _playerRepository.AddPlayerAsync(player);
+      return player;
     }
   }
 }

@@ -14,17 +14,28 @@ namespace Kasino.Controllers
   {
     private readonly IPlayerService _playerService;
 
+    /// <summary>
+    /// Constructor for PlayerController
+    /// </summary>
+    /// <param name="playerService">Player service dependency</param>
     public PlayerController(IPlayerService playerService)
     {
       _playerService = playerService;
     }
 
+    /// <summary>
+    /// Get all players asynchronously
+    /// </summary>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
     {
       return Ok(await _playerService.GetAllPlayersAsync());
     }
 
+    /// <summary>
+    /// Get a player by ID asynchronously
+    /// </summary>
+    /// <param name="id">Player ID</param>
     [HttpGet("{id}")]
     public async Task<ActionResult<Player>> GetPlayer(string id)
     {
@@ -38,6 +49,10 @@ namespace Kasino.Controllers
       return Ok(player);
     }
 
+    /// <summary>
+    /// Create a player asynchronously
+    /// </summary>
+    /// <param name="player">Player object to create</param>
     [HttpPost]
     public async Task<ActionResult<Player>> CreatePlayer(Player player)
     {

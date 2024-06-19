@@ -2,14 +2,34 @@ using Kasino.Models;
 
 namespace Kasino.Services
 {
+  /// <summary>
+  /// Interface for interacting with player data asynchronously.
+  /// </summary>
   public interface IPlayerService
-  {/*This code snippet defines an interface IPlayerService with methods to interact with player data asynchronously. 
-    * The methods include fetching all players, getting a player by ID, updating a player's score, and deleting a player.*/
+  {
+    /// <summary>
+    /// Fetches all players asynchronously.
+    /// </summary>
     Task<IEnumerable<Player>> GetAllPlayersAsync();
+
+    /// <summary>
+    /// Fetches a player by ID asynchronously.
+    /// </summary>
     Task<Player> GetPlayerByIdAsync(string id);
+
+    /// <summary>
+    /// Updates a player's score asynchronously.
+    /// </summary>
     Task<bool> UpdatePlayerScoreAsync(string id, int newScore);
+
+    /// <summary>
+    /// Deletes a player asynchronously.
+    /// </summary>
     Task<bool> DeletePlayerAsync(string id);
-    // Adds a new player asynchronously and returns the created player object or its identifier
+
+    /// <summary>
+    /// Adds a new player asynchronously and returns the created player object or its identifier.
+    /// </summary>
     Task<Player> CreatePlayerAsync(Player player);
   }
 }
