@@ -9,10 +9,10 @@ namespace Kasino.Backend.Helpers
     public MappingProfile()
     {
       // Define a mapping from the Player entity to the PlayerDTO
-      CreateMap<Player, PlayerDTO>();
+      CreateMap<Player, PlayerDto>();
 
       // Define a mapping from the Game entity to the GameDTO
-      CreateMap<Game, GameDTO>();
+      CreateMap<Game, GameDto>();
       // If you have other mappings, define them here as well
     }
   }
