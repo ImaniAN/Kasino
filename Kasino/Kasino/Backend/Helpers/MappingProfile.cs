@@ -1,4 +1,5 @@
 using AutoMapper;
+using Kasino.Backend.DTOs;
 using Kasino.Models;
 
 namespace Kasino.Backend.Helpers
