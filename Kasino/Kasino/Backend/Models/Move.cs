@@ -8,11 +8,11 @@ namespace Kasino.Models
     public List<Card> TargetCards { get; set; } = new List<Card>(); // For Capture and Build actions
     public int TargetValue { get; set; } // For Build actions
     public int MoveId { get; set; } // Unique identifier for the move
-    public string PlayerId { get; set; } // Identifier of the player who made the move
+    public string? PlayerId { get; set; } // Identifier of the player who made the move
     public List<Card> CardsPlayed { get; set; } = new List<Card>(); // Cards involved in the move
     public int MoveSequence { get; set; } // The sequence number of the move in the game
     public int PointsGained { get; set; } // Points gained from this move
-    public DateTime Timestamp { get; set; } /
+    public DateTime Timestamp { get; set; }
     public enum MoveActionType
     {
       Capture,
