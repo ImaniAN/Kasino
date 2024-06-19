@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR;
  * message to all clients connected to the hub using SignalR. The method SendMessage takes 
  * a user and a message as parameters and broadcasts this message to all clients using the method SendAsync. */
 
+
 namespace Kasino.Hubs
 {
   public class GameHub : Hub
