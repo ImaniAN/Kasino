@@ -1,14 +1,18 @@
+using AutoMapper;
 using Kasino.Models;
 
-namespace Kasino.Services
+namespace Kasino.Backend.Helpers
 {
   public class MappingProfile : Profile
-  {/*This code defines a MappingProfile class that inherits from Profile. 
-    * It sets up mappings between Player and PlayerDto objects for conversion purposes.*/
+  {
     public MappingProfile()
     {
-      CreateMap<Player, PlayerDto>(); // Map Player to PlayerDto
-      CreateMap<PlayerDto, Player>(); // Map PlayerDto to Player
+      // Define a mapping from the Player entity to the PlayerDTO
+      CreateMap<Player, PlayerDTO>();
+
+      // Define a mapping from the Game entity to the GameDTO
+      CreateMap<Game, GameDTO>();
+      // If you have other mappings, define them here as well
     }
   }
 }
