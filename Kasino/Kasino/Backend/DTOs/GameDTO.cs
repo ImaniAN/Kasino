@@ -1,13 +1,25 @@
-public class GameDTO
+namespace Kasino.Backend.DTOs
 {
-  /*This code defines a data transfer object (DTO) for a game.
-   * It contains properties for the game's Id, Name, Genre, and ReleaseDate, 
-   * along with any additional properties relevant to the game's data transfer needs.*/
-  public string Id { get; set; }
-  public string Name { get; set; }
-  public string Genre { get; set; }
-  public DateTime ReleaseDate { get; set; }
+  public class GameSessionDto
+  {
+    // Unique identifier for the game session
+    public string? SessionId { get; set; }
 
-  // Additional properties relevant to the game's data transfer needs
+    // List of players participating in this game session
+    public List<PlayerDto> Players { get; set; } = new List<PlayerDto>();
+
+    // Current state of the game (e.g., "WaitingForPlayers", "InProgress", "Completed")
+    public string? GameState { get; set; }
+
+    // Scores or other metrics relevant to the game's outcome
+    public Dictionary<string, int> Scores { get; set; } = new Dictionary<string, int>();
+
+    // Timestamp for when the game session started
+    public DateTime StartTime { get; set; }
+
+    // Timestamp for when the game session ended (if it has ended)
+    public DateTime? EndTime { get; set; }
+
+    // Additional properties or methods as needed for managing game sessions
+  }
 }
-
