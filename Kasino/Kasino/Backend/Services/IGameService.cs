@@ -1,5 +1,4 @@
-﻿
-using Kasino.Models;
+﻿using Kasino.Models;
 
 namespace Kasino.Backend.Services
 {

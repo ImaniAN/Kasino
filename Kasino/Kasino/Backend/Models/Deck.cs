@@ -41,6 +41,5 @@ namespace Kasino.Models
       Cards.RemoveAt(0);
       return card;
     }
-
   }
 }

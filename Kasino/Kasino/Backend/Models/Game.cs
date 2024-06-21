@@ -2,9 +2,10 @@ using Kasino.Backend.Models;
 
 namespace Kasino.Models
 {
-  /*This code defines a Game class that represents a card game. It has properties for 
-   * Id, Players, FloorCards, Deck, and CurrentRound. 
+  /*This code defines a Game class that represents a card game. It has properties for
+   * Id, Players, FloorCards, Deck, and CurrentRound.
    * It also includes methods for dealing cards, capturing cards, building, Lahlaring, and calculating scores in the game.*/
+
   public class Game
   {
     public string? Id { get; set; }
@@ -41,9 +42,11 @@ namespace Kasino.Models
         case 2 or 4:
           cardsPerPlayer = 10;
           break;
+
         case 3:
           cardsPerPlayer = 13; // 13 cards per player
           break;
+
         default:
           throw new InvalidOperationException("Unsupported number of players");
       }
@@ -61,7 +64,6 @@ namespace Kasino.Models
         }
       }
     }
-
 
     public void Capture(Card playedCard, Player player)
     {
@@ -94,7 +96,6 @@ namespace Kasino.Models
       // Additional logic for special captures or scoring might go here
     }
 
-
     public void Build(Card playedCard, Player player, int targetValue)
     {
       // List to hold potential build cards from the floor
@@ -114,7 +115,6 @@ namespace Kasino.Models
       {
         // Correctly instantiate a Build object with the player and the combined cards
         Build newBuild = new Build(player, new List<Card> { playedCard }.Concat(potentialBuildCards).ToList());
-
 
         // Remove the played card from the player's hand
         player.Hand.Remove(playedCard);
@@ -138,7 +138,6 @@ namespace Kasino.Models
         throw new InvalidOperationException("Build is not possible with the provided card and target value.");
       }
     }
-
 
     public void Lahla(Card playedCard, Player player)
     {
@@ -185,6 +184,5 @@ namespace Kasino.Models
 
       // Additional scoring logic and determining the round or game winner can be added here
     }
-
   }
 }

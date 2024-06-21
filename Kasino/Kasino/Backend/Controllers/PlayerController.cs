@@ -3,9 +3,9 @@ using Kasino.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kasino.Controllers
-{  /*This code defines a PlayerController class in a C# ASP.NET Core Web API. 
-    * It handles HTTP requests for player-related operations such as 
-    * getting all players, getting a player by ID, and creating a new player. 
+{  /*This code defines a PlayerController class in a C# ASP.NET Core Web API.
+    * It handles HTTP requests for player-related operations such as
+    * getting all players, getting a player by ID, and creating a new player.
     * The controller interacts with a service (IPlayerService) to perform these operations asynchronously.*/
 
   [Route("api/[controller]")]

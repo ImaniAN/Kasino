@@ -13,6 +13,7 @@ namespace Kasino.Models
     public int MoveSequence { get; set; } // The sequence number of the move in the game
     public int PointsGained { get; set; } // Points gained from this move
     public DateTime Timestamp { get; set; }
+
     public enum MoveActionType
     {
       Capture,
@@ -32,7 +33,6 @@ namespace Kasino.Models
                                                    // MoveSequence, PointsGained should be set elsewhere as they are not available here
       Timestamp = DateTime.UtcNow; // Capture the current time when the move is made
     }
-
 
     // Constructor for a move with target cards (e.g., capturing or building)
     public Move(Player player, Card playedCard, MoveActionType actionType, List<Card> targetCards)

@@ -1,8 +1,8 @@
 namespace Kasino.Backend.DTOs
 {
   public class PlayersDto
-  {/*This code defines a data transfer object (DTO) for a player. 
-  * It contains properties for 
+  {/*This code defines a data transfer object (DTO) for a player.
+  * It contains properties for
   * PlayerId, Name, Score, and a list of GameDTO's representing games associated with the player.
 
 */

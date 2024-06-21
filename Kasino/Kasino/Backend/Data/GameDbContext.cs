@@ -65,6 +65,7 @@ namespace Kasino.Data
       throw new NotImplementedException();
     }
   }
+
   public class DbContextOptions<T>
   {
   }
