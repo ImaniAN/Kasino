@@ -5,7 +5,7 @@ using System.Data.Entity;
 namespace Kasino.Repositories
 {
   // PlayerRepository handles database operations for Player entities
-  public class PlayerRepository : IPlayerRepository
+  public class PlayerRepository
   {
     private readonly GameDbContext _context;
 
@@ -22,7 +22,7 @@ namespace Kasino.Repositories
     }
 
     // Get a player by id asynchronously
-    public async Task<Player> GetPlayerByIdAsync(string id)
+    public async Task<Player> GetPlayerByIdAsync(int id)
     {
       return await _context.Players.FindAsync(id);
     }
@@ -45,19 +45,27 @@ namespace Kasino.Repositories
     // Update a player asynchronously
     public async Task UpdatePlayerAsync(Player player)
     {
-      _context.Entry(player).State = EntityState.Modified;
-      await _context.SaveChangesAsync();
+      var existingPlayer = await _context.Players.FindAsync(player.Id);
+      if (existingPlayer != null)
+      {
+        // Update each property manually
+        existingPlayer.Name = player.Name;
+        existingPlayer.Score = player.Score;
+
+        // Save changes
+        await _context.SaveChangesAsync();
+      }
     }
 
     // Delete a player asynchronously
     public async Task DeletePlayerAsync(Player player)
     {
-      if (_context.Entry(player).State == EntityState.Detached)
+      var existingPlayer = await _context.Players.FindAsync(player.Id);
+      if (existingPlayer != null)
       {
-        _context.Players.Attach(player);
+        _context.Players.Remove(existingPlayer);
+        await _context.SaveChangesAsync();
       }
-      _context.Players.Remove(player);
-      await _context.SaveChangesAsync();
     }
   }
 }
