@@ -5,7 +5,7 @@ using System.Data.Entity;
 namespace Kasino.Repositories
 {
   // PlayerRepository handles database operations for Player entities
-  public class PlayerRepository
+  public class PlayerRepository : IPlayerRepository
   {
     private readonly GameDbContext _context;
 

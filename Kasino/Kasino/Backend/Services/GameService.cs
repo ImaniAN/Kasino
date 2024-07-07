@@ -1,4 +1,3 @@
-using Kasino.Backend.Services;
 using Kasino.Models;
 using Kasino.Repositories;
 
@@ -7,7 +6,7 @@ namespace Kasino.Services
   /// <summary>
   /// Service for managing game data
   /// </summary>
-  public class GameService : IGameService
+  public class GameService
   {
     private readonly IGameRepository _gameRepository;
 
